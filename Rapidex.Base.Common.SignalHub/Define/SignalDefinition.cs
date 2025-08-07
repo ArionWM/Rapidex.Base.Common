@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Rapidex.MessageHub;
+namespace Rapidex.SignalHub;
 public class SignalDefinition : ISignalDefinition
 {
     public string SignalName { get; set; }

@@ -23,7 +23,7 @@ namespace Rapidex
 #endif
 
         internal static IServiceProvider _serviceProvider;
-        internal static IMessageHub _messageHub;
+        internal static ISignalHub _signalHub;
 
         /// <summary>
         /// Alabileceği değerler; 
@@ -47,20 +47,20 @@ namespace Rapidex
         public static AssemblyManager Assembly { get; set; }// = new AssemblyManager();
 
         public static ITimeProvider Time { get; internal set; }
-        public static IMessageHub MessageHub
+        public static ISignalHub SignalHub
         {
             get
             {
-                return _messageHub;
+                return _signalHub;
             }
 
             set
             {
-                if (_messageHub != null)
+                if (_signalHub != null)
                 {
                     throw new InvalidOperationException("MessageHub already set");
                 }
-                _messageHub = value;
+                _signalHub = value;
             }
         }
 

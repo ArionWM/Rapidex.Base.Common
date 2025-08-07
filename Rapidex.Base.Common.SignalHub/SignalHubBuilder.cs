@@ -1,16 +1,16 @@
 ﻿using Mapster;
 using Microsoft.Extensions.Configuration;
-using Rapidex.MessageHub;
+using Rapidex.SignalHub;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Rapidex.MessageHub;
-internal class MessageHubBuilder : IManager
+namespace Rapidex.SignalHub;
+internal class SignalHubBuilder : IManager
 {
-    public void CreatePredefinedContent(IMessageHub hub)
+    public void CreatePredefinedContent(ISignalHub hub)
     {
         hub.RegisterSignalDefinition(new SignalDefinition(SignalConstants.Signal_Editing, "Editing", "Entity", true));
         hub.RegisterSignalDefinition(new SignalDefinition(SignalConstants.Signal_Importing, "Importing", "Entity", true));
@@ -34,19 +34,19 @@ internal class MessageHubBuilder : IManager
 
     public void Setup(IServiceCollection services)
     {
-        if (Rapidex.Common.MessageHub == null)
+        if (Rapidex.Common.SignalHub == null)
         {
-            MessageHub hub = new MessageHub();
-            Rapidex.Common.MessageHub = hub;
+            SignalHub hub = new SignalHub();
+            Rapidex.Common.SignalHub = hub;
         }
 
-        services.AddSingletonForProd<IMessageHub>(Rapidex.Common.MessageHub);
+        services.AddSingletonForProd<ISignalHub>(Rapidex.Common.SignalHub);
     }
 
     public void Start(IServiceProvider serviceProvider)
     {
 
-        IMessageHub hub = serviceProvider.GetRequiredService<IMessageHub>();
+        ISignalHub hub = serviceProvider.GetRequiredService<ISignalHub>();
         this.CreatePredefinedContent(hub);
 
         //TODO: App.Messages = hub;

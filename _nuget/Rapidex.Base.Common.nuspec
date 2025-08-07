@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
 	<metadata>
 		<id>Rapidex.Base.Common</id>
-		<version>0.0.1</version>
+		<version>0.0.5</version>
 		<title>Rapidex</title>
 		<authors>ArionWm (Türkay Kaynak)</authors>
 		<owners>ArionWm (Türkay Kaynak)</owners>
@@ -45,8 +45,8 @@
 		<file src="..\Rapidex.Base.Common.Logging.Serilog\bin\Debug\net8.0\Rapidex.Base.Common.Logging.Serilog.Core8.dll" target="lib\net8.0\Rapidex.Common.Logging.Serilog.dll" />
 		<file src="..\Rapidex.Base.Common.Logging.Serilog\bin\Debug\net8.0\Rapidex.Base.Common.Logging.Serilog.Core8.pdb" target="lib\net8.0\Rapidex.Common.Logging.Serilog.pdb" />
 		
-		<file src="..\Rapidex.Base.Common.SignalHub\bin\Debug\net8.0\Rapidex.Common.dll" target="lib\net8.0\Rapidex.Common.SignalHub.dll" />
-		<file src="..\Rapidex.Base.Common.SignalHub\bin\Debug\net8.0\Rapidex.Common.pdb" target="lib\net8.0\Rapidex.Common.SignalHub.pdb" />
+		<file src="..\Rapidex.Base.Common.SignalHub\bin\Debug\net8.0\Rapidex.Common.SignalHub.dll" target="lib\net8.0\Rapidex.Common.SignalHub.dll" />
+		<file src="..\Rapidex.Base.Common.SignalHub\bin\Debug\net8.0\Rapidex.Common.SignalHub.pdb" target="lib\net8.0\Rapidex.Common.SignalHub.pdb" />
 
 		
 		<file src="..\ReadMe.md" target="docs\README.md" />

@@ -4,17 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Rapidex.MessageHub;
-internal class MessageHubSubscriber
+namespace Rapidex.SignalHub;
+internal class SignalHubSubscriber
 {
     public string ClientId { get; }
     public int Id { get; set; }
-    public MessageTopic Topic { get; set; }
+    public SignalTopic Topic { get; set; }
     internal List<string> TopicSectionsForLocate { get; set; }
     internal int TopicSectionLevelForLocate { get; set; } = 0;
-    public Func<IMessageArguments, IMessageArguments> Handler { get; set; }
+    public Func<ISignalArguments, ISignalArguments> Handler { get; set; }
 
-    public MessageHubSubscriber(string clientId, int handlerId, MessageTopic topic, Func<IMessageArguments, IMessageArguments> handler)
+    public SignalHubSubscriber(string clientId, int handlerId, SignalTopic topic, Func<ISignalArguments, ISignalArguments> handler)
     {
         topic.Check();
 

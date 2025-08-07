@@ -5,14 +5,14 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Rapidex.MessageHub;
-internal class MessageHub : IMessageHub
+namespace Rapidex.SignalHub;
+internal class SignalHub : ISignalHub
 {
     public ISignalDefinitionCollection Definitions { get; } = new SignalDefinitionCollection();
 
     int lastId = 1000000;
 
-    internal MessageHubSubscriptionTree Subscriptions { get; } = new MessageHubSubscriptionTree();
+    internal SignalHubSubscriptionTree Subscriptions { get; } = new SignalHubSubscriptionTree();
 
 
     protected int GetId()
@@ -21,33 +21,33 @@ internal class MessageHub : IMessageHub
         return this.lastId;
     }
 
-    protected IMessageArguments Invoke(MessageHubSubscriber subscriber, IMessageArguments args)
+    protected ISignalArguments Invoke(SignalHubSubscriber subscriber, ISignalArguments args)
     {
-        IMessageArguments resultArgs = subscriber.Handler.Invoke(args);
+        ISignalArguments resultArgs = subscriber.Handler.Invoke(args);
         return resultArgs;
     }
 
-    protected IResult<IEnumerable<IMessageArguments>> PublishInternalSync(MessageTopic topic, IMessageArguments args)
+    protected IResult<IEnumerable<ISignalArguments>> PublishInternalSync(SignalTopic topic, ISignalArguments args)
     {
         args.NotNull();
         args.Topic.NotNull();
 
-        MessageHubSubscriber[] subscribers = this.Subscriptions.GetSubscribers(topic.Sections.ToArray());
+        SignalHubSubscriber[] subscribers = this.Subscriptions.GetSubscribers(topic.Sections.ToArray());
         if (subscribers.IsNullOrEmpty())
-            return Result<IEnumerable<IMessageArguments>>.Ok(new List<IMessageArguments>());
+            return Result<IEnumerable<ISignalArguments>>.Ok(new List<ISignalArguments>());
 
-        IMessageArguments _input = args.Clone<IMessageArguments>();
+        ISignalArguments _input = args.Clone<ISignalArguments>();
 
-        List<IMessageArguments> returnedArgs = new List<IMessageArguments>();
+        List<ISignalArguments> returnedArgs = new List<ISignalArguments>();
 
-        foreach (MessageHubSubscriber subs in subscribers)
+        foreach (SignalHubSubscriber subs in subscribers)
             try
             {
-                IMessageArguments argsForInvoke = _input;
+                ISignalArguments argsForInvoke = _input;
                 argsForInvoke.ClientId = subs.ClientId;
                 argsForInvoke.HandlerId = subs.Id;
 
-                IMessageArguments resultArg = this.Invoke(subs, argsForInvoke);
+                ISignalArguments resultArg = this.Invoke(subs, argsForInvoke);
                 if (resultArg == null)
                 {
                     returnedArgs.Add(argsForInvoke);
@@ -65,11 +65,11 @@ internal class MessageHub : IMessageHub
 
         //Sonuncu resultArg 'ı alıyoruz.
         returnedArgs.Insert(0, _input);
-        Result<IEnumerable<IMessageArguments>> result = Result<IEnumerable<IMessageArguments>>.Ok(returnedArgs.AsReadOnly());
+        Result<IEnumerable<ISignalArguments>> result = Result<IEnumerable<ISignalArguments>>.Ok(returnedArgs.AsReadOnly());
         return result;
     }
 
-    protected virtual IResult<IEnumerable<IMessageArguments>> PublishInternal(MessageTopic topic, IMessageArguments args)
+    protected virtual IResult<IEnumerable<ISignalArguments>> PublishInternal(SignalTopic topic, ISignalArguments args)
     {
         if (topic.SignalDefinition != null)
         {
@@ -81,9 +81,9 @@ internal class MessageHub : IMessageHub
 
         args.Topic = topic;
 
-        MessageHubSubscriber[] subscribers = this.Subscriptions.GetSubscribers(topic.Sections.ToArray());
+        SignalHubSubscriber[] subscribers = this.Subscriptions.GetSubscribers(topic.Sections.ToArray());
         if (subscribers.IsNullOrEmpty())
-            return Result<IEnumerable<IMessageArguments>>.Ok(new List<IMessageArguments>());
+            return Result<IEnumerable<ISignalArguments>>.Ok(new List<ISignalArguments>());
 
         args.Id = Guid.NewGuid();
 
@@ -92,15 +92,15 @@ internal class MessageHub : IMessageHub
         //Job_PublishInternalAsync
     }
 
-    public Task<IResult<IEnumerable<IMessageArguments>>> Publish(MessageTopic topic, IMessageArguments args)
+    public Task<IResult<IEnumerable<ISignalArguments>>> Publish(SignalTopic topic, ISignalArguments args)
     {
-        return Task<IResult<IEnumerable<IMessageArguments>>>.Run(() =>
+        return Task<IResult<IEnumerable<ISignalArguments>>>.Run(() =>
         {
             return this.PublishInternal(topic, args);
         });
     }
 
-    public async Task<IResult<int>> Subscribe(string clientId, MessageTopic topic, Func<IMessageArguments, IMessageArguments> handler)
+    public async Task<IResult<int>> Subscribe(string clientId, SignalTopic topic, Func<ISignalArguments, ISignalArguments> handler)
     {
         topic.Check()
             .Sections.NotEmpty();

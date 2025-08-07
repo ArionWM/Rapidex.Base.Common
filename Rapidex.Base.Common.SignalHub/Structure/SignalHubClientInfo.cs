@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Rapidex.MessageHub.Structure;
-internal class MessageHubClientInfo
+namespace Rapidex.SignalHub.Structure;
+internal class SignalHubClientInfo
 {
     public bool IsExternal { get; set; } = false;
     public string ClientId { get; set; } = null;

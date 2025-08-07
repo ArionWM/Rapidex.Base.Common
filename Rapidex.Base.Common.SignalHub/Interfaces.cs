@@ -2,7 +2,7 @@
 
 using System.Threading.Tasks;
 
-namespace Rapidex.MessageHub;
+namespace Rapidex.SignalHub;
 
 //public interface ISignalDefinition
 //{

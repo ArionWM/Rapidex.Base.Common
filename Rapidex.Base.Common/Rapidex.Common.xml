@@ -301,27 +301,27 @@
             Setup zamanında çalışmayan, start ile çalıştırılan servislerdir.
             </summary>
         </member>
-        <member name="M:Rapidex.IMessageHub.Subscribe(System.String,Rapidex.MessageTopic,System.Func{Rapidex.IMessageArguments,Rapidex.IMessageArguments})">
+        <member name="M:Rapidex.ISignalHub.Subscribe(System.String,Rapidex.SignalTopic,System.Func{Rapidex.ISignalArguments,Rapidex.ISignalArguments})">
             <summary>
                 Subscribe to a signal.
             </summary>
             <param name="topic">The signal to subscribe to.</param>
             <param name="handler">The handler to call when the signal is raised.</param>
         </member>
-        <member name="M:Rapidex.IMessageHub.Unsubscribe(System.Int32)">
+        <member name="M:Rapidex.ISignalHub.Unsubscribe(System.Int32)">
             <summary>
                 Unsubscribe from a signal.
             </summary>
             <param name="topic">The signal to unsubscribe from.</param>
             <param name="handler">The handler to remove.</param>
         </member>
-        <member name="M:Rapidex.IMessageHub.Publish(Rapidex.MessageTopic,Rapidex.IMessageArguments)">
+        <member name="M:Rapidex.ISignalHub.Publish(Rapidex.SignalTopic,Rapidex.ISignalArguments)">
             <summary>
                 Raise a signal.
             </summary>
             <param name="topic">The signal to raise.</param>
         </member>
-        <member name="T:Rapidex.MessageTopic">
+        <member name="T:Rapidex.SignalTopic">
             <summary>
             <![CDATA[<tenantShortName>/<workspace>/<module>/<signal>/<signal type specific>]]>
             </summary>
@@ -382,6 +382,24 @@
             </summary>
             <param name="time"></param>
             <param name="period"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Rapidex.UnitTests.ICoreTestFixture.ClearCaches">
+            <summary>
+            Sadece ön bellekler temizlenir
+            </summary>
+        </member>
+        <member name="M:Rapidex.UnitTests.ICoreTestFixture.Reinit">
+            <summary>
+            Tüm test yapısını kaldırır
+            Örn: Veritabanları silinir vs.
+            </summary>
+        </member>
+        <member name="M:Rapidex.UnitTests.ICoreTestFixture.GetFileContentAsString(System.String)">
+            <summary>
+            Test için kullanılan içerik dosyalarını okur ve string olarak döner. 
+            </summary>
+            <param name="relativeFilePath"></param>
             <returns></returns>
         </member>
     </members>

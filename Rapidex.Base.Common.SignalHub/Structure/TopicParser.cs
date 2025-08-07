@@ -6,7 +6,7 @@
 //using System.Text.RegularExpressions;
 //using System.Threading.Tasks;
 
-//namespace Rapidex.MessageHub;
+//namespace Rapidex.SignalHub;
 //internal class TopicParser
 //{
 //    private static readonly Regex MqttTopicRegex = new Regex(

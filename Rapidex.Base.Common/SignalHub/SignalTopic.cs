@@ -1,4 +1,4 @@
-﻿using Rapidex.MessageHub;
+﻿using Rapidex.SignalHub;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -11,7 +11,7 @@ namespace Rapidex;
 /// <summary>
 /// <![CDATA[<tenantShortName>/<workspace>/<module>/<signal>/<signal type specific>]]>
 /// </summary>
-public class MessageTopic : ICloneable, IComparable<MessageTopic>, IEquatable<MessageTopic>
+public class SignalTopic : ICloneable, IComparable<SignalTopic>, IEquatable<SignalTopic>
 {
     public const string ANY = "+";
     public string Tenant { get; set; }
@@ -39,12 +39,12 @@ public class MessageTopic : ICloneable, IComparable<MessageTopic>, IEquatable<Me
 
     public int HandlerId { get; set; } = 0;
 
-    public MessageTopic()
+    public SignalTopic()
     {
         
     }
 
-    public MessageTopic(string tenant, string workspace, string module, string signal, string entity = null, string entityId = null, string field = null)
+    public SignalTopic(string tenant, string workspace, string module, string signal, string entity = null, string entityId = null, string field = null)
     {
         this.Tenant = tenant;
         this.Workspace = workspace;
@@ -59,7 +59,7 @@ public class MessageTopic : ICloneable, IComparable<MessageTopic>, IEquatable<Me
     public object Clone()
     {
 
-        return new MessageTopic
+        return new SignalTopic
         {
             Tenant = this.Tenant,
             Workspace = this.Workspace,
@@ -75,12 +75,12 @@ public class MessageTopic : ICloneable, IComparable<MessageTopic>, IEquatable<Me
         };
     }
 
-    public int CompareTo(MessageTopic? other)
+    public int CompareTo(SignalTopic? other)
     {
         return string.Compare(this.ToString(), other?.ToString(), StringComparison.OrdinalIgnoreCase);
     }
 
-    public bool Equals(MessageTopic? other)
+    public bool Equals(SignalTopic? other)
     {
         if (other == null)
             return false;
@@ -130,7 +130,7 @@ public class MessageTopic : ICloneable, IComparable<MessageTopic>, IEquatable<Me
             throw new ArgumentException("Signal is required for MessageTopic");
     }
 
-    public MessageTopic Check()
+    public SignalTopic Check()
     {
         this.Validate();
         this.CheckSections();
@@ -164,14 +164,14 @@ public class MessageTopic : ICloneable, IComparable<MessageTopic>, IEquatable<Me
         return topic;
     }
 
-    public static implicit operator string(MessageTopic topic)
+    public static implicit operator string(SignalTopic topic)
     {
         return topic.ToString();
     }
 
-    public static implicit operator MessageTopic(string topicText)
+    public static implicit operator SignalTopic(string topicText)
     {
-        TopicParser.TopicParseResult result = TopicParser.Parse(Rapidex.Common.MessageHub, topicText);
+        TopicParser.TopicParseResult result = TopicParser.Parse(Rapidex.Common.SignalHub, topicText);
         if (result.Valid)
         {
             return result.Topic;
@@ -182,9 +182,9 @@ public class MessageTopic : ICloneable, IComparable<MessageTopic>, IEquatable<Me
         }
     }
 
-    public static MessageTopic CreateForEntity(string signalName, string entityName)
+    public static SignalTopic CreateForEntity(string signalName, string entityName)
     {
-        return new MessageTopic
+        return new SignalTopic
         {
             Tenant = ANY,
             Workspace = ANY,

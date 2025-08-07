@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 namespace Rapidex;
 
 [JsonDerivedBase]
-public class MessageArguments : IMessageArguments
+public class SignalArguments : ISignalArguments
 {
     public Guid Id { get; set; }
-    public MessageTopic Topic { get; set; }
+    public SignalTopic Topic { get; set; }
     public string ClientId { get; set; }
     public int HandlerId { get; set; }
     public string SignalName { get; set; }

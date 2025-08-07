@@ -5,7 +5,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace Rapidex.MessageHub;
+namespace Rapidex.SignalHub;
 public class TopicParser
 {
     public static readonly string Wildcard = "+";
@@ -23,7 +23,7 @@ public class TopicParser
     {
         public bool Valid { get; set; }
         public bool Match { get; set; }
-        public MessageTopic Topic { get; set; }
+        public SignalTopic Topic { get; set; }
 
         public string Description { get; set; }
 
@@ -50,7 +50,7 @@ public class TopicParser
         }
     }
 
-    public static TopicParseResult Parse(IMessageHub hub, string topicText)
+    public static TopicParseResult Parse(ISignalHub hub, string topicText)
     {
 
         if (!MqttTopicRegex.IsMatch(topicText))
@@ -65,7 +65,7 @@ public class TopicParser
             return TopicParseResult.Invalid("Topic must have 4 section (min)");
         }
 
-        MessageTopic topic = new MessageTopic();
+        SignalTopic topic = new SignalTopic();
         topic.Sections = parts.ToArray();
 
         topic.Tenant = parts[0];
