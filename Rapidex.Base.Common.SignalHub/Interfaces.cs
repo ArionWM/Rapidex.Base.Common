@@ -18,7 +18,7 @@ namespace Rapidex.SignalHub;
 //    //Can ui access ?
 //}
 
-//public interface IMessageArguments : ICloneable
+//public interface ISignalArguments : ICloneable
 //{
 //    Guid Id { get; set; } //Unique id of the message. This is used to identify the message in the system. It should be a guid.
 //    string ClientId { get; set; }
@@ -30,13 +30,13 @@ namespace Rapidex.SignalHub;
 //    string ContentType { get; }
 //}
 
-//public interface IEntityReleatedMessageArguments : IMessageArguments
+//public interface IEntityReleatedMessageArguments : ISignalArguments
 //{
 //    IEntity Entity { get; }
 
 //}
 
-//public interface IMessageHub
+//public interface ISignalHub
 //{
 //    SignalDefinitionCollection Definitions { get; }
 
@@ -48,7 +48,7 @@ namespace Rapidex.SignalHub;
 //    /// </summary>
 //    /// <param name="topic">The signal to subscribe to.</param>
 //    /// <param name="handler">The handler to call when the signal is raised.</param>
-//    Task<IResult<int>> Subscribe(string clientId, MessageTopic topic, Func<IMessageArguments, IMessageArguments> handler);
+//    Task<IResult<int>> Subscribe(string clientId, MessageTopic topic, Func<ISignalArguments, ISignalArguments> handler);
 
 //    /// <summary>
 //    ///     Unsubscribe from a signal.
@@ -61,7 +61,7 @@ namespace Rapidex.SignalHub;
 //    ///     Raise a signal.
 //    /// </summary>
 //    /// <param name="topic">The signal to raise.</param>
-//    Task<IResult<IEnumerable<IMessageArguments>>> Publish(MessageTopic topic, IMessageArguments args);
+//    Task<IResult<IEnumerable<ISignalArguments>>> Publish(MessageTopic topic, ISignalArguments args);
 
 //    void RegisterSignalDefinition(ISignalDefinition signalDefinition);
 //}

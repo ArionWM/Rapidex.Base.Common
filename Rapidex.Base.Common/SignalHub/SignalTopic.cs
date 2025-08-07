@@ -121,13 +121,13 @@ public class SignalTopic : ICloneable, IComparable<SignalTopic>, IEquatable<Sign
     protected void Validate()
     {
         if (this.Tenant.IsNullOrEmpty())
-            throw new ArgumentException("Tenant is required for MessageTopic");
+            throw new ArgumentException("Tenant is required for SignalTopic");
         if (this.Workspace.IsNullOrEmpty())
-            throw new ArgumentException("Workspace is required for MessageTopic");
+            throw new ArgumentException("Workspace is required for SignalTopic");
         if (this.Module.IsNullOrEmpty())
-            throw new ArgumentException("Module is required for MessageTopic");
+            throw new ArgumentException("Module is required for SignalTopic");
         if (this.Signal.IsNullOrEmpty())
-            throw new ArgumentException("Signal is required for MessageTopic");
+            throw new ArgumentException("Signal is required for SignalTopic");
     }
 
     public SignalTopic Check()
