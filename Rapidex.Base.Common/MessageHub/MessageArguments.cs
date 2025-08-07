@@ -1,0 +1,28 @@
+﻿using Mapster;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Rapidex;
+
+[JsonDerivedBase]
+public class MessageArguments : IMessageArguments
+{
+    public Guid Id { get; set; }
+    public MessageTopic Topic { get; set; }
+    public string ClientId { get; set; }
+    public int HandlerId { get; set; }
+    public string SignalName { get; set; }
+    public bool IsSynchronous { get; set; }
+    public string Data { get; set; }
+    public string ContentType { get; set; }
+    public string Tags { get; set; }
+
+    public object Clone()
+    {
+        Type type = this.GetType();
+        return this.Adapt(type, type);
+    }
+}

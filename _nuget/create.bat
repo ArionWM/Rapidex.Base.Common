@@ -1,0 +1,1 @@
+nuget pack Rapidex.Base.Common.nuspec -OutputDirectory .\_output\ 

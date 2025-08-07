@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35312.102
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rapidex.Base.Common", "Rapidex.Base.Common\Rapidex.Base.Common.csproj", "{FE04722C-4FB1-42EF-B90F-BAC782AA9F6D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rapidex.Base.Common.Logging.SerilogImp.Core8", "Rapidex.Base.Common.Logging.Serilog\Rapidex.Base.Common.Logging.SerilogImp.Core8.csproj", "{C4F9F666-165D-4AEB-B7C5-6CD4E495D7AC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rapidex.Base.Common.SignalHub", "Rapidex.Base.Common.SignalHub\Rapidex.Base.Common.SignalHub.csproj", "{FB86398D-0378-4202-80A7-5100D272776B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8EC462FD-D22E-90A8-E5CE-7E832BA40C5D}"
+	ProjectSection(SolutionItems) = preProject
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+		RapidexAssemblyInfo.cs = RapidexAssemblyInfo.cs
+		LICENSE.md = LICENSE.md
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_nuget", "_nuget", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+	ProjectSection(SolutionItems) = preProject
+		_nuget\create.bat = _nuget\create.bat
+		_nuget\Rapidex.Base.Common.nuspec = _nuget\Rapidex.Base.Common.nuspec
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FE04722C-4FB1-42EF-B90F-BAC782AA9F6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE04722C-4FB1-42EF-B90F-BAC782AA9F6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE04722C-4FB1-42EF-B90F-BAC782AA9F6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE04722C-4FB1-42EF-B90F-BAC782AA9F6D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4F9F666-165D-4AEB-B7C5-6CD4E495D7AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4F9F666-165D-4AEB-B7C5-6CD4E495D7AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4F9F666-165D-4AEB-B7C5-6CD4E495D7AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4F9F666-165D-4AEB-B7C5-6CD4E495D7AC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB86398D-0378-4202-80A7-5100D272776B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB86398D-0378-4202-80A7-5100D272776B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB86398D-0378-4202-80A7-5100D272776B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB86398D-0378-4202-80A7-5100D272776B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{02EA681E-C7D8-13C7-8484-4AC65E1B71E8} = {8EC462FD-D22E-90A8-E5CE-7E832BA40C5D}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7BA78EAA-AAC5-488A-9D07-61F6CB6F437A}
+	EndGlobalSection
+EndGlobal
