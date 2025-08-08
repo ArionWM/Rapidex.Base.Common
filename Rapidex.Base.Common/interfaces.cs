@@ -256,16 +256,18 @@ namespace Rapidex
         }
     }
 
-    public interface IExceptionManager
-    {
-        Exception Translate(Exception ex);
-    }
-
     public interface IExceptionTranslator
     {
         Exception Translate(Exception ex);
 
     }
+
+    public interface IExceptionManager 
+    {
+        Exception Translate(Exception ex);
+    }
+
+    
 
     public interface IComponent
     {
