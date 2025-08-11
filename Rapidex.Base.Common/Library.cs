@@ -28,10 +28,6 @@ internal class Library : AssemblyDefinitionBase, IRapidexAssemblyDefinition
     {
         //services.AddSingleton<IServiceScopeFactory, RapidexServiceScopeFactory>();
 
-    }
-
-    public override void SetupMetadata(IServiceCollection services)
-    {
         services.Configure<JsonSerializerOptions>(opt => opt.SetDefaultOptions());
 
         services.AddSingletonForProd<ITimeProvider, DefaultTimeProvider>();
@@ -40,6 +36,11 @@ internal class Library : AssemblyDefinitionBase, IRapidexAssemblyDefinition
         services.AddSingletonForProd<ExceptionManager, ExceptionManager>();
         services.AddSingletonForProd<IExceptionManager, ExceptionManager>();
         services.AddSingletonForProd<IExceptionTranslator, CommonExceptionTranslator>();
+    }
+
+    public override void SetupMetadata(IServiceCollection services)
+    {
+       
 
 
     }

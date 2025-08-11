@@ -75,6 +75,7 @@ namespace Rapidex
     /// <summary>
     /// Setup zamanında çalışan servislerdir.
     /// </summary>
+    [Obsolete("", true)]
     public interface IPreSetupManager
     {
         //void Start(IServiceCollection services);

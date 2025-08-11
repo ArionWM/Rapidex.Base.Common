@@ -15,6 +15,20 @@ public static class YamlHelper
 {
     private static YamlDotNet.Serialization.ISerializer _defaultSerializer; // = new YamlDotNet.Serialization.Serializer();
     private static YamlDotNet.Serialization.IDeserializer _defaultDeserializer;
+    private static YamlDotNet.Serialization.IDeserializer _expandoDeserializer;
+
+    private static object CheckStringDict(object dict)
+    {
+        if (dict is IDictionary<object, object> objDict)
+        {
+            IDictionary<string, object> strDict = objDict.ToStringKeys(true);
+            return strDict;
+        }
+        else
+        {
+            return dict;
+        }
+    }
 
     public static void Setup()
     {
@@ -24,6 +38,11 @@ public static class YamlHelper
 
         YamlHelper._defaultDeserializer = new DeserializerBuilder()
             .WithNamingConvention(UnderscoredNamingConvention.Instance)  // see height_in_inches in sample yml 
+            .Build();
+
+        YamlHelper._expandoDeserializer = new DeserializerBuilder()
+            .WithNamingConvention(CamelCaseNamingConvention.Instance)
+            .IgnoreUnmatchedProperties()
             .Build();
     }
 
@@ -93,8 +112,44 @@ public static class YamlHelper
         {
             return _defaultDeserializer.DeserializeMany<TItem>(reader).ToArray();
         }
+    }
 
 
 
+    public static IEnumerable<object> FromYamlManyToExpando(string yaml)
+    {
+        string _yaml = yaml.Replace("\t", " ").Trim();
+        object result = _expandoDeserializer.DeserializeMany(_yaml);
+        IList<object> objects = (result as IEnumerable<object>)?.ToList();
+        if (objects is null)
+            objects = new List<object> { result };
+
+        for (int i = 0; i < objects.Count; i++)
+        {
+            object item = objects[i];
+            objects[i] = CheckStringDict(item);
+        }
+
+        return objects;
+    }
+
+    public static IEnumerable<string> FromYamlManyToJson(string yaml)
+    {
+        string _yaml = yaml.Replace("\t", " ").Trim();
+        object result = _expandoDeserializer.DeserializeMany(_yaml);
+
+        //Each object is IDictionary<string, object>
+        IEnumerable<object> objects = result as IEnumerable<object>;
+        if (objects is null)
+            objects = new List<object> { result };
+
+        List<string> jsons = new List<string>();
+        foreach (var obj in objects)
+        {
+            string json = obj.ToJson();
+            jsons.Add(json);
+        }
+
+        return jsons;
     }
 }

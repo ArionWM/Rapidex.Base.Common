@@ -212,6 +212,20 @@ namespace Rapidex.Base.Common.Assemblies
             return FindDerivedClassTypes(typeof(T));
         }
 
+
+        public Type[] FindDerivedClassTypesWithAssemblyInfo(Type baseTypeOrInterface, AssemblyInfo ainfo)
+        {
+            //TODO: Cache. Ancak CheckAssemblyInformation kullanıldığında (yeni eklendiğinde vs.) cache sıfırlanmalı
+            List<Type> typeList = new();
+            Type[] types = FindDerivedClassTypes(ainfo.Assembly, baseTypeOrInterface);
+            foreach (var type in types)
+            {
+                typeList.Add(type);
+            }
+
+            return typeList.ToArray();
+        }
+
         public (Type type, AssemblyInfo assembly)[] FindDerivedClassTypesWithAssemblyInfo(Type baseTypeOrInterface)
         {
             //TODO: Cache. Ancak CheckAssemblyInformation kullanıldığında (yeni eklendiğinde vs.) cache sıfırlanmalı
@@ -283,6 +297,30 @@ namespace Rapidex.Base.Common.Assemblies
 
         }
 
+
+        public void SetupAssemblyServices(IServiceCollection services )
+        {
+            foreach (var proxAssembly in this.AssemblyInstances.List)
+            {
+                proxAssembly.SetupServices(services);
+            }
+        }
+
+        public void SetupAssemblyMetadata(IServiceCollection services)
+        {
+            foreach (var proxAssembly in this.AssemblyInstances.List)
+            {
+                proxAssembly.SetupMetadata(services);
+            }
+        }
+
+        public void StartAssemblyMetadata(IServiceProvider serviceProvider)
+        {
+            foreach (var proxAssembly in this.AssemblyInstances.List)
+            {
+                proxAssembly.Start(serviceProvider);
+            }
+        }
 
     }
 

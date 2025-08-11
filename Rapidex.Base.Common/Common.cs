@@ -113,9 +113,7 @@ namespace Rapidex
             Rapidex.Common.ServiceProvider = services.BuildServiceProvider();
             Rapidex.Common.Time = new DefaultTimeProvider(); //ServiceProvider?
 
-
-            JsonHelper.Setup();
-            YamlHelper.Setup();
+            
             MappingHelper.Setup();
 
         }

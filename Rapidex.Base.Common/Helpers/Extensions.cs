@@ -52,6 +52,11 @@ namespace Rapidex
             }
             return ur;
         }
+
+        public static T[] GetModifieds<T>(this IUpdateResult<T> ur)
+        {
+            return ur.AddedItems.OrderedMerge(ur.ModifiedItems).ToArray();
+        }
     }
 
     public static class ObjectX

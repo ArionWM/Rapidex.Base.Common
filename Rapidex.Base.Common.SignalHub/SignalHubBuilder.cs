@@ -34,19 +34,21 @@ internal class SignalHubBuilder : IManager
 
     public void Setup(IServiceCollection services)
     {
-        if (Rapidex.Common.SignalHub == null)
+        services.AddSingletonForProd<ISignalHub>( (sp, key) =>
         {
+            if (Rapidex.Common.SignalHub != null)
+                return Rapidex.Common.SignalHub;
+
             SignalHub hub = new SignalHub();
             Rapidex.Common.SignalHub = hub;
-        }
-
-        services.AddSingletonForProd<ISignalHub>(Rapidex.Common.SignalHub);
+            return hub;
+        });
     }
 
     public void Start(IServiceProvider serviceProvider)
     {
 
-        ISignalHub hub = serviceProvider.GetRequiredService<ISignalHub>();
+        ISignalHub hub = serviceProvider.GetRapidexService<ISignalHub>();
         this.CreatePredefinedContent(hub);
 
         //TODO: App.Messages = hub;

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Rapidex
 {
+    //TODO: Dictionary -> ConcurrentDictionary
     public class ComponentDictionary<TItem> : DictionaryA<TItem>, IList<TItem>, IList, IEnumerable<TItem>
         where TItem : IComponent
     {
