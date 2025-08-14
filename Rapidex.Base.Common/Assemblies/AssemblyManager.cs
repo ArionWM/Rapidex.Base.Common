@@ -314,7 +314,7 @@ namespace Rapidex.Base.Common.Assemblies
             }
         }
 
-        public void StartAssemblyMetadata(IServiceProvider serviceProvider)
+        public void StartAssemblies(IServiceProvider serviceProvider)
         {
             foreach (var proxAssembly in this.AssemblyInstances.List)
             {
