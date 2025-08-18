@@ -104,16 +104,17 @@ namespace Rapidex
             AssemblyManager asman = new AssemblyManager();
             Common.Assembly = asman;
             services.AddSingleton<AssemblyManager>(asman);
-
             Common.Assembly.Setup(services);
+
             Common.Converter = new TypeConverter();
             Common.Converter.Setup(services);
+            Rapidex.Common.Time = new DefaultTimeProvider(); //TODO: ServiceProvider?
 
             //Geçici olarak boş bir sp yerleştiriyoruz
-            Rapidex.Common.ServiceProvider = services.BuildServiceProvider();
-            Rapidex.Common.Time = new DefaultTimeProvider(); //ServiceProvider?
+            //Rapidex.Common.ServiceProvider = services.BuildServiceProvider();
 
-            
+
+
             MappingHelper.Setup();
 
         }

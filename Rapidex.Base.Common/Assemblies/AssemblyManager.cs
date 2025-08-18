@@ -32,7 +32,7 @@ namespace Rapidex.Base.Common.Assemblies
             return paths.ToArray();
         }
 
-        public AssemblyInfo[] CheckAssemblyInformation(Assembly assembly)
+        public AssemblyInfo[] Add(Assembly assembly)
         {
             List<AssemblyInfo> infos = new List<AssemblyInfo>();
 
@@ -53,6 +53,13 @@ namespace Rapidex.Base.Common.Assemblies
                     if (!infos.Find(adefInstance.Name).Any() && !infos.Find(adefInstance.NavigationName).Any())
                         infos.Add(new AssemblyInfo(null, adefInstance.Name, adefInstance.NavigationName, null, assembly, type));
                 }
+            }
+            else
+            {
+                AssemblyInfo ainfo = new();
+                ainfo.Name = assembly.GetName().Name;
+                ainfo.Assembly = assembly;
+                infos.Add(ainfo);
             }
 
             this.assemblyDefinitions.Add(infos);
@@ -75,7 +82,7 @@ namespace Rapidex.Base.Common.Assemblies
                 return new AssemblyInfo[0];
 
             Log.Info($"Checking assembly: {nameOrPath}");
-            return this.CheckAssemblyInformation(assembly);
+            return this.Add(assembly);
         }
 
 
@@ -306,7 +313,7 @@ namespace Rapidex.Base.Common.Assemblies
             }
         }
 
-        public void SetupAssemblyServices(IServiceCollection services )
+        public void SetupAssemblyServices(IServiceCollection services)
         {
             this.IterateAsemblies(assembly =>
             {
@@ -314,13 +321,13 @@ namespace Rapidex.Base.Common.Assemblies
             });
         }
 
-        public void SetupAssemblyMetadata(IServiceCollection services)
-        {
-            this.IterateAsemblies(assembly =>
-            {
-                assembly.SetupMetadata(services);
-            });
-        }
+        //public void SetupAssemblyMetadata(IServiceCollection services)
+        //{
+        //    this.IterateAsemblies(assembly =>
+        //    {
+        //        assembly.SetupMetadata(services);
+        //    });
+        //}
 
         public void StartAssemblies(IServiceProvider serviceProvider)
         {

@@ -55,7 +55,7 @@ namespace Rapidex.Base.Common.Assemblies
             return this.InitializatorType.GetHashCode();
         }
 
-        public int CompareTo(AssemblyInfo other)
+        public int CompareTo(AssemblyInfo? other)
         {
             if (object.ReferenceEquals(this, other) || this.InitializatorType == other.InitializatorType)
                 return 0;
@@ -63,7 +63,7 @@ namespace Rapidex.Base.Common.Assemblies
             return -1;
         }
 
-        public bool Equals(AssemblyInfo other)
+        public bool Equals(AssemblyInfo? other)
         {
             return object.ReferenceEquals(this, other) || this.InitializatorType == other.InitializatorType;
         }
