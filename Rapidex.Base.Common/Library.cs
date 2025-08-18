@@ -9,6 +9,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.Json;
 
+[assembly: InternalsVisibleTo("Rapidex.Base.Data")]
 [assembly: InternalsVisibleTo("Rapidex.UnitTest.Base.Data")]
 [assembly: InternalsVisibleTo("Rapidex.UnitTest.Base.Application")]
 [assembly: InternalsVisibleTo("Rapidex.Base.Application.Common")]
@@ -36,13 +37,6 @@ internal class Library : AssemblyDefinitionBase, IRapidexAssemblyDefinition
         services.AddSingletonForProd<ExceptionManager, ExceptionManager>();
         services.AddSingletonForProd<IExceptionManager, ExceptionManager>();
         services.AddSingletonForProd<IExceptionTranslator, CommonExceptionTranslator>();
-    }
-
-    public override void SetupMetadata(IServiceCollection services)
-    {
-       
-
-
     }
 
     public override void Start(IServiceProvider serviceProvider)

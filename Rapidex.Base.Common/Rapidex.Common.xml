@@ -15,6 +15,12 @@
             Belirtildiği enum değerinin null anlamına geldiğini belirtir. Bu değer; IsNullOrEmpty: True olarak yorumlanır
             </summary>
         </member>
+        <member name="T:Rapidex.IStack`1">
+            <summary>
+            ThreadStatic context yığınları için
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
         <member name="M:Rapidex.CollectionExtensions.CreateArray``1(``0,``0[])">
             <summary>
             İlgili nesne ve diğerlerinden bir array üretir
@@ -84,6 +90,18 @@
             Load configuration and prepare for work
             </summary>
             <param name="configuration"></param>
+        </member>
+        <member name="T:Rapidex.IRapidexAssemblyDefinition">
+            <summary>
+            Rapidex library mark. 
+            IRapidexModule contained libraries are scanned and loaded by Rapidex framework. 
+            Other libraries are ignored.
+            </summary>
+        </member>
+        <member name="T:Rapidex.IManager">
+            <summary>
+            Setup zamanında çalışmayan, start ile çalıştırılan servislerdir.
+            </summary>
         </member>
         <!-- Badly formed XML comment ignored for member "M:Rapidex.HashHelper.GetStableHashCode(System.String)" -->
         <member name="M:Rapidex.DependencyInjectionExtensions.AddTransientForProd``2(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
@@ -277,29 +295,6 @@
             Örn: Türkiye Büyük Millet Mecisi -> TBMM
             </summary>
             <returns></returns>
-        </member>
-        <member name="T:Rapidex.IStack`1">
-            <summary>
-            ThreadStatic context yığınları için
-            </summary>
-            <typeparam name="T"></typeparam>
-        </member>
-        <member name="T:Rapidex.IRapidexAssemblyDefinition">
-            <summary>
-            Rapidex library mark. 
-            IRapidexModule contained libraries are scanned and loaded by Rapidex framework. 
-            Other libraries are ignored.
-            </summary>
-        </member>
-        <member name="T:Rapidex.IPreSetupManager">
-            <summary>
-            Setup zamanında çalışan servislerdir.
-            </summary>
-        </member>
-        <member name="T:Rapidex.IManager">
-            <summary>
-            Setup zamanında çalışmayan, start ile çalıştırılan servislerdir.
-            </summary>
         </member>
         <member name="M:Rapidex.ISignalHub.Subscribe(System.String,Rapidex.SignalTopic,System.Func{Rapidex.ISignalArguments,Rapidex.ISignalArguments})">
             <summary>

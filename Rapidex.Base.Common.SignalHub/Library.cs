@@ -18,11 +18,6 @@ internal class Library : AssemblyDefinitionBase, IRapidexAssemblyDefinition
     public override string TablePrefix => "sgn";
     public override int Index => 1;
 
-    public override void SetupMetadata(IServiceCollection services)
-    {
-
-    }
-
     public override void SetupServices(IServiceCollection services)
     {
         SignalHubBuilder hubBuilder = new SignalHubBuilder();

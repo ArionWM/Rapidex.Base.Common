@@ -27,6 +27,6 @@ public abstract class AssemblyDefinitionBase : IRapidexAssemblyDefinition
     }
 
     public abstract void SetupServices(IServiceCollection services);
-    public abstract void SetupMetadata(IServiceCollection services);
+    
     public abstract void Start(IServiceProvider serviceProvider);
 }

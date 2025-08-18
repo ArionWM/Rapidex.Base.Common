@@ -298,28 +298,36 @@ namespace Rapidex.Base.Common.Assemblies
         }
 
 
-        public void SetupAssemblyServices(IServiceCollection services )
+        public void IterateAsemblies(Action<IRapidexAssemblyDefinition> action)
         {
             foreach (var proxAssembly in this.AssemblyInstances.List)
             {
-                proxAssembly.SetupServices(services);
+                action(proxAssembly);
             }
+        }
+
+        public void SetupAssemblyServices(IServiceCollection services )
+        {
+            this.IterateAsemblies(assembly =>
+            {
+                assembly.SetupServices(services);
+            });
         }
 
         public void SetupAssemblyMetadata(IServiceCollection services)
         {
-            foreach (var proxAssembly in this.AssemblyInstances.List)
+            this.IterateAsemblies(assembly =>
             {
-                proxAssembly.SetupMetadata(services);
-            }
+                assembly.SetupMetadata(services);
+            });
         }
 
         public void StartAssemblies(IServiceProvider serviceProvider)
         {
-            foreach (var proxAssembly in this.AssemblyInstances.List)
+            this.IterateAsemblies(assembly =>
             {
-                proxAssembly.Start(serviceProvider);
-            }
+                assembly.Start(serviceProvider);
+            });
         }
 
     }
