@@ -71,7 +71,7 @@ namespace Rapidex
             if (Rapidex.Common._serviceProvider == null)
             {
                 //Henüz sistem ayağa kalkmamış
-                return Activator.CreateInstance(type);
+                return Activator.CreateInstance(type, parameters);
             }
 
             if (type.ContainsGenericParameters)

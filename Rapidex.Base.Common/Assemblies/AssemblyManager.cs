@@ -110,6 +110,9 @@ namespace Rapidex.Base.Common.Assemblies
 
             foreach (var assemblyInfo in this.AssemblyDefinitions)
             {
+                if(assemblyInfo.InitializatorType == null)
+                    continue; //Assembly don't have a IRapidexAssemblyDefinition derived definition class
+
                 IRapidexAssemblyDefinition proxAssembly = TypeHelper.CreateInstance<IRapidexAssemblyDefinition>(assemblyInfo.InitializatorType);
                 this.AssemblyInstances.Add(proxAssembly.Index, proxAssembly);
                 assemblyInfo.DatabaseEntityPrefix = proxAssembly.TablePrefix;
