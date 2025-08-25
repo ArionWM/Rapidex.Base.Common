@@ -296,6 +296,56 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="F:Rapidex.TypeInheritenceHelper._inheritanceCache">
+            <summary>
+            Static cache for type inheritance relationships to improve performance
+            Key: Type, Value: HashSet of base types within the current type array
+            </summary>
+        </member>
+        <member name="F:Rapidex.TypeInheritenceHelper._inheritanceDepthCache">
+            <summary>
+            Static cache for inheritance depth calculations
+            Key: Type full name, Value: inheritance depth
+            </summary>
+        </member>
+        <member name="M:Rapidex.TypeInheritenceHelper.SortTypesByInheritanceHierarchy(System.Type[])">
+            <summary>
+            Sorts an array of types based on inheritance hierarchy, placing derived types before their base types.
+            Uses static caching for improved performance on repeated calls.
+            For example, if type B derives from type A, then B will appear before A in the result.
+            </summary>
+            <param name="types">Array of types to sort</param>
+            <returns>Sorted array with derived types first</returns>
+        </member>
+        <member name="M:Rapidex.TypeInheritenceHelper.BuildInheritanceMap(System.Type[],System.String)">
+            <summary>
+            Builds inheritance relationships map with caching support
+            </summary>
+            <param name="types">Array of types to analyze</param>
+            <param name="cacheKey">Cache key for the type array</param>
+            <returns>Dictionary mapping each type to its base types within the array</returns>
+        </member>
+        <member name="M:Rapidex.TypeInheritenceHelper.GetCachedInheritanceDepth(System.Type,System.Type[])">
+            <summary>
+            Gets cached inheritance depth of a type within the given type array.
+            Higher values indicate more derived types.
+            </summary>
+            <param name="type">Type to calculate depth for</param>
+            <param name="typeArray">Array of types to consider for depth calculation</param>
+            <returns>Inheritance depth</returns>
+        </member>
+        <member name="M:Rapidex.TypeInheritenceHelper.CreateCacheKey(System.Type[])">
+            <summary>
+            Creates a cache key from the types array
+            </summary>
+            <param name="types">Array of types</param>
+            <returns>Cache key string</returns>
+        </member>
+        <member name="M:Rapidex.TypeInheritenceHelper.ClearInheritanceCache">
+            <summary>
+            Clears the static inheritance caches. Call this method if type definitions change at runtime.
+            </summary>
+        </member>
         <member name="M:Rapidex.ISignalHub.Subscribe(System.String,Rapidex.SignalTopic,System.Func{Rapidex.ISignalArguments,Rapidex.ISignalArguments})">
             <summary>
                 Subscribe to a signal.
