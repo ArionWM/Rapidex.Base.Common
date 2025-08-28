@@ -10,26 +10,22 @@ using System.Threading.Tasks;
 
 [assembly: CollectionBehavior(DisableTestParallelization = true)]
 
-namespace Rapidex.UnitTest.Base.Common
+namespace Rapidex.UnitTest.Base.Common;
+
+internal class Module : AssemblyDefinitionBase, IRapidexAssemblyDefinition
 {
-    internal class Module : AssemblyDefinitionBase, IRapidexAssemblyDefinition
+    public override string Name => "UnitTest.Common";
+    public override string TablePrefix => "utest";
+    public override int Index => 1000;
+
+    public override void SetupServices(IServiceCollection services)
     {
-        public override string Name => "UnitTest.Common";
-        public override string TablePrefix => "utest";
-        public override int Index => 1000;
+        Rapidex.Common.EnviromentCode = CommonConstants.ENV_UNITTEST;
+    }
 
-        public override void SetupServices(IServiceCollection services)
-        {
-            Rapidex.Common.EnviromentCode = CommonConstants.ENV_UNITTEST;
-        }
 
-        public override void SetupMetadata(IServiceCollection services)
-        {
-        }
+    public override void Start(IServiceProvider serviceProvider)
+    {
 
-        public override void Start(IServiceProvider serviceProvider)
-        {
-
-        }
     }
 }
