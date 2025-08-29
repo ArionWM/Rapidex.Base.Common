@@ -24,16 +24,18 @@ namespace Rapidex
         public static T NotNull<T, E>([NotNull] this T obj, string message = null) where E : Exception, new()
         {
             if (obj == null)
-                throw new InvalidOperationException(message ?? "Object is null");
-
-            //.Should().NotBeNull(message);
-
-            //            if (obj == null)
-            //            {
-            //#pragma warning disable CS8597 // Thrown value may be null.
-            //                throw Activator.CreateInstance(typeof(E), message) as E;
-            //#pragma warning restore CS8597 // Thrown value may be null.
-            //            }
+            {
+                var exception = new E();
+                if (!string.IsNullOrEmpty(message))
+                {
+                    var messageField = typeof(E).GetField("_message", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic);
+                    if (messageField != null)
+                    {
+                        messageField.SetValue(exception, message);
+                    }
+                }
+                throw exception;
+            }
 
             return obj;
         }

@@ -22,7 +22,7 @@ namespace Rapidex
         {
             if (Logger == null)
             {
-                System.Diagnostics.Debug.WriteLine("Logger is not set. Please set Logger property of Log class.");
+                System.Diagnostics.Debug.WriteLine("Logger is not set. Please set Logger property of Log class. See: abc"); //TODO: Create document and reference here
                 return false;
             }
             return true;
