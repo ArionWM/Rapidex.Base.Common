@@ -10,7 +10,7 @@ namespace Rapidex;
 
 public interface IExceptionTranslator
 {
-    Exception Translate(Exception ex);
+    Exception Translate(Exception ex, string? additionalInfo = null);
 
 }
 
